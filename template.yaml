@@ -24,7 +24,7 @@ Globals:
   Function:
     Timeout: 15
     MemorySize: 512
-    Runtime: nodejs8.10
+    Runtime: nodejs12.x
     Handler: app.lambdaHandler
     Tracing: Active
     Layers:
@@ -47,7 +47,7 @@ Resources:
             Stream: !GetAtt DDBConsumer.ConsumerARN
             StartingPosition: LATEST
             BatchSize: 100
-  
+
   S3Function:
     Type: AWS::Serverless::Function
     Properties:
@@ -69,7 +69,7 @@ Resources:
     Type: "AWS::Kinesis::Stream"
     Properties:
       ShardCount: 4
-  
+
   DDBConsumer:
     Type: "AWS::Kinesis::StreamConsumer"
     Properties:
@@ -81,7 +81,7 @@ Resources:
     Properties:
       StreamARN: !GetAtt KinesisStream.Arn
       ConsumerName: S3Consumer
-  
+
   DDBRecords:
     Type: AWS::Serverless::SimpleTable
 
